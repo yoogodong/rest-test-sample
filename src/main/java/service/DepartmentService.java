@@ -23,7 +23,7 @@ public class DepartmentService {
 
         EmployeeService es = new EmployeeService();
 
-        es.add("John",888);
+        es.add("John",868);
         es.add("Marry",999);
         es.add("Nancy",1000);
 
