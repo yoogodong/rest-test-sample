@@ -22,7 +22,7 @@ public class EmployeeServiceIT {
     public void config(){
         RestAssured.baseURI="http://localhost";
         RestAssured.port=8080;
-        RestAssured.basePath="employee";
+        RestAssured.basePath="rest-test/employee";
         RestAssured.config = new RestAssuredConfig().encoderConfig(encoderConfig().defaultContentCharset("UTF-8"));
     }
 
@@ -39,10 +39,8 @@ public class EmployeeServiceIT {
 //
 //        assertEquals(em1,expect);
 
-
-        get(id).then().statusCode(200).body("id", equalTo(id)).body("name",equalTo("Alex")).body("salary",equalTo(999));
-
-
+        given().redirects();
+        get(id).then().statusCode(200).body("id", equalTo(id)).body("name",equalTo("Alex"),"salary",equalTo(999));
 
         given().param("id",id).
                 when().delete().

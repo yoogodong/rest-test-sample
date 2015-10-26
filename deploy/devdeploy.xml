@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Context docBase="/Users/twer/git/rest-test/target/rest-test-1.0-SNAPSHOT" reloadable="true">
 
-    <!-- Default set of monitored resources -->
+    <!-- Default set of monitored resources 0-->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
 
 

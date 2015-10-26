@@ -21,7 +21,7 @@ public class DepartmentServiceIT {
     public void config(){
         RestAssured.baseURI="http://localhost";
         RestAssured.port=8080;
-        RestAssured.basePath="department";
+        RestAssured.basePath="rest-test/department";
     }
 
     @Test
