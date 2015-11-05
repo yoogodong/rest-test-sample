@@ -1,6 +1,6 @@
 package service;
 
-import org.junit.BeforeClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import vo.Employee;
 

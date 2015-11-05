@@ -3,8 +3,9 @@
 <suite name="rest service" verbose="1" >
     <parameter name="" value=""/>
     <test name="rest service"   >
-        <packages>
-            <package name="service"/>
-        </packages>
+        <classes>
+            <class name="service.DepartmentServiceIT"/>
+            <class name="service.EmployeeServiceIT"/>
+        </classes>
     </test>
 </suite>
