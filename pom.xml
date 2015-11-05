@@ -170,6 +170,7 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/rest-test.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                 </configuration>
                 <executions>
                     <execution>
