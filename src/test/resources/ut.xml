@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="rest service" verbose="1" >
+    <parameter name="" value=""/>
+    <test name="rest service"   >
+        <packages>
+            <package name="service"/>
+        </packages>
+    </test>
+</suite>
