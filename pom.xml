@@ -105,9 +105,9 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <systemProperties>
-                        <JAVA_OPTS>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.7.4.201502262128/org.jacoco.agent-0.7.4.201502262128-runtime.jar=destfile=${project.build.directory}/itest.jacoco.exec</JAVA_OPTS>
-                    </systemProperties>
+                    <!--<systemProperties>-->
+                        <!--<JAVA_OPTS>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.7.4.201502262128/org.jacoco.agent-0.7.4.201502262128-runtime.jar=destfile=${project.build.directory}/itest.jacoco.exec</JAVA_OPTS>-->
+                    <!--</systemProperties>-->
                     <fork>true</fork>
                 </configuration>
             </plugin>
@@ -128,7 +128,7 @@
                         <properties>
                             <cargo.servlet.port>8080</cargo.servlet.port>
                             <cargo.tomcat.ajp.port>8109</cargo.tomcat.ajp.port>
-                            <cargo.jvmargs>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.7.4.201502262128/org.jacoco.agent-0.7.4.201502262128-runtime.jar=destfile=${project.build.directory}/itest.jacoco.exec</cargo.jvmargs>
+                            <!--<cargo.jvmargs>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.7.4.201502262128/org.jacoco.agent-0.7.4.201502262128-runtime.jar=destfile=${project.build.directory}/itest.jacoco.exec</cargo.jvmargs>-->
                         </properties>
                     </configuration>
                 </configuration>

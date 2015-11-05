@@ -31,13 +31,4 @@ public class EmployeeServiceTest {
         Employee em = service.get("1");
     }
 
-    @Test
-    public void testDelete() throws Exception {
-
-    }
-
-    @Test
-    public void testGet1() throws Exception {
-
-    }
 }
