@@ -25,13 +25,16 @@ public class EmployeeServiceIT {
         RestAssured.basePath="rest-test/employee";
         RestAssured.config = new RestAssuredConfig().encoderConfig(encoderConfig().defaultContentCharset("UTF-8"));
     }
+    
+
+    
 
 
 
     public void should_get_the_same_employee_and_be_deleteable_after_add(){
         String id = given().formParameters("name","Alex","salary",999).
                 when().post().body().asString();
-//
+
 //        We can imply it like this :
 //          assertEquals(get(id).statusCode(),200);
 //        String em1=get(id).body().asString();
@@ -39,8 +42,7 @@ public class EmployeeServiceIT {
 //
 //        assertEquals(em1,expect);
 
-        given().redirects();
-        get(id).then().statusCode(200).body("id", equalTo(id)).body("name",equalTo("Alex"),"salary",equalTo(999));
+        get(id).then().log().all().statusCode(200).body("id", equalTo(id)).body("name",equalTo("Alex"),"salary",equalTo(999));
 
         given().param("id",id).
                 when().delete().
@@ -51,8 +53,10 @@ public class EmployeeServiceIT {
     public void should_get_the_same_employee_and_be_deleteable_after_add2(){
 
         String id = given().formParameters("name", "国家", "salary", 999).
+                log().all().
                 when().post().body().asString();
         ResponseSpecification spec=expect().statusCode(200).body("id", equalTo(id)).body("name", equalTo("国家")).body("salary", equalTo(999));
+
         get(id).then().spec(spec);
         given().param("id", id).
                 when().delete().then().spec(spec);

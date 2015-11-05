@@ -24,8 +24,10 @@ public class DepartmentServiceIT {
         RestAssured.basePath="rest-test/department";
     }
 
+//    示例，怎样自定义 Matcher 
     @Test
     public void should_exists_employee_whose_salary_is_1000(){
+
         Department dep = get().then().statusCode(200).extract().as(Department.class);
 
         assertThat(dep.getEmployeeList(),hasItem(new BaseMatcher<Employee>() {
