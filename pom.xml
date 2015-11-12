@@ -19,8 +19,9 @@
 
 
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.jacoco.itReportPath>${project.build.directory}/itest.jacoco.exec</sonar.jacoco.itReportPath>
+        <!--<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>-->
+        <!--<sonar.jacoco.itReportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.itReportPath>-->
+        <!--<sonar.jacoco.reportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.reportPath>-->
 
 
     </properties>
@@ -75,11 +76,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.agent</artifactId>
-            <version>0.7.4.201502262128</version>
-        </dependency>
 
     </dependencies>
 
@@ -90,6 +86,25 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.4.201502262128</version>
+                <executions>
+                    <execution>
+                        <id>ut</id>
+                        <phase>process-test-classes</phase>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>it</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>prepare-agent-integration</goal>
+                        </goals>
+                        <configuration>
+                            <propertyName>jacoco.agent.itArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -100,16 +115,37 @@
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
+
+
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <!--<systemProperties>-->
-                        <!--<JAVA_OPTS>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.7.4.201502262128/org.jacoco.agent-0.7.4.201502262128-runtime.jar=destfile=${project.build.directory}/itest.jacoco.exec</JAVA_OPTS>-->
-                    <!--</systemProperties>-->
+                    <systemProperties>
+                        <!--不起作用-->
+                        <JAVA_OPTS>${jacoco.agent.itArgLine}</JAVA_OPTS>
+                    </systemProperties>
                     <fork>true</fork>
                 </configuration>
+                <!--<executions>-->
+                    <!--&lt;!&ndash; start server before integration tests &ndash;&gt;-->
+                    <!--<execution>-->
+                        <!--<id>start-container</id>-->
+                        <!--<phase>pre-integration-test</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>run</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                    <!--&lt;!&ndash; stop server after integration tests &ndash;&gt;-->
+                    <!--<execution>-->
+                        <!--<id>stop-container</id>-->
+                        <!--<phase>post-integration-test</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>shutdown</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
             </plugin>
 
             <plugin>
@@ -128,7 +164,8 @@
                         <properties>
                             <cargo.servlet.port>8080</cargo.servlet.port>
                             <cargo.tomcat.ajp.port>8109</cargo.tomcat.ajp.port>
-                            <!--<cargo.jvmargs>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.7.4.201502262128/org.jacoco.agent-0.7.4.201502262128-runtime.jar=destfile=${project.build.directory}/itest.jacoco.exec</cargo.jvmargs>-->
+                            <!--<cargo.jvmargs>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.7.4.201502262128/org.jacoco.agent-0.7.4.201502262128-runtime.jar=destfile=${project.build.directory}/jacoco-it.exec</cargo.jvmargs>-->
+                            <cargo.jvmargs>${jacoco.agent.itArgLine}</cargo.jvmargs>
                         </properties>
                     </configuration>
                 </configuration>
@@ -170,13 +207,13 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/rest-test.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                 </configuration>
                 <executions>
                     <execution>
                         <id>it</id>
                         <goals>
                             <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>

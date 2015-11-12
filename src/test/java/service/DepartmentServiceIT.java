@@ -21,14 +21,14 @@ public class DepartmentServiceIT {
     public void config(){
         RestAssured.baseURI="http://localhost";
         RestAssured.port=8080;
-        RestAssured.basePath="rest-test/department";
+        RestAssured.basePath="rest-test";
     }
 
 //    示例，怎样自定义 Matcher 
     @Test
     public void should_exists_employee_whose_salary_is_1000(){
 
-        Department dep = get().then().statusCode(200).extract().as(Department.class);
+        Department dep = get("/department").then().statusCode(200).extract().as(Department.class);
 
         assertThat(dep.getEmployeeList(),hasItem(new BaseMatcher<Employee>() {
 
@@ -48,6 +48,6 @@ public class DepartmentServiceIT {
 
     @Test
     public void should_exists_employee_whose_salary_is_1000_with_json_path(){
-        get().then().statusCode(200).body("employeeList.salary",hasItem(1000));
+        get("/department").then().statusCode(200).body("employeeList.salary",hasItem(1000));
     }
 }

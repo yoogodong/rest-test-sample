@@ -1,8 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="rest service" verbose="1" >
+
     <parameter name="" value=""/>
-    <test name="rest service"   >
+
+    <test name="rest service" parallel="methods" >
         <classes>
             <class name="service.DepartmentServiceIT"/>
             <class name="service.EmployeeServiceIT"/>
