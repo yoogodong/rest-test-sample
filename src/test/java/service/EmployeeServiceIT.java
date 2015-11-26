@@ -1,86 +1,49 @@
 package service;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.config.RestAssuredConfig;
-import com.jayway.restassured.specification.ResponseSpecification;
-import org.testng.annotations.BeforeClass;
+import com.jayway.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
-import static com.jayway.restassured.RestAssured.*;
-import static com.jayway.restassured.config.EncoderConfig.encoderConfig;
+import static com.jayway.restassured.RestAssured.get;
+import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * integration
  * Created by Yonggao.Dong on 15/10/08.
  */
-@Test
 public class EmployeeServiceIT {
 
-    @BeforeClass
-    public void config(){
-        RestAssured.baseURI="http://localhost";
-        RestAssured.port=8080;
-        RestAssured.basePath="rest-test";
-        RestAssured.config = new RestAssuredConfig().encoderConfig(encoderConfig().defaultContentCharset("UTF-8"));
-    }
-    
-
-    
+    private String id;
+    private String name="Alex";
+    private int salary=999;
 
 
+    @Test
+    public void should_return_digital_id_after_post_a_employee(){
+        id = given().formParameters("name",name,"salary",salary).when().post("employee").
+                then().statusCode(200).contentType(ContentType.JSON).
+                extract().body().asString();
 
-    public void should_get_the_same_employee_and_be_deleteable_after_add(){
-        String id = given().formParameters("name","Alex","salary",999).
-                when().post("employee").body().asString();
-
-//        We can imply it like this :
-//          assertEquals(get(id).statusCode(),200);
-//        String em1=get(id).body().asString();
-//        String expect = "{"id":1,"name","Alex","salary":999,a:{b:c}}";  body("a.b",c)
-//
-//        assertEquals(em1,expect);
-
-        get("employee/{id}",id).then().log().all().statusCode(200).body("id", equalTo(id)).body("name",equalTo("Alex"),"salary",equalTo(999));
-
-        given().param("id",id).
-                when().delete("employee").
-                then().statusCode(200).body("id", equalTo(id)).body("name", equalTo("Alex")).body("salary", equalTo(999));
-    }
-
-    //just show how to re-use response specification;
-    public void should_get_the_same_employee_and_be_deleteable_after_add2(){
-
-        String id = given().formParameters("name", "国家", "salary", 999).
-//                log().all().
-                when().post("employee").body().asString();
-        ResponseSpecification spec=expect().statusCode(200).body("id", equalTo(id)).body("name", equalTo("国家")).body("salary", equalTo(999));
-
-        get("employee/{id}",id).then().spec(spec);
-        given().param("id", id).
-                when().delete("employee").then().spec(spec);
+        assertTrue(id.matches("\\d+"));
     }
 
 
-
-    public void should_not_get_the_employee_that_has_been_deleted(){
-        String id = given().formParameters("name","Alex","salary",999).
-                when().post("employee").body().asString();
-        given().param("id", id).
-                when().delete("employee");
-        int bodyLength = get("employee/{id}",id).then().extract().asString().length();
-        assertEquals(bodyLength,0);
+    @Test(dependsOnMethods = "should_return_digital_id_after_post_a_employee")
+    public void should_get_the_same_value_after_post(){
+        get("employee/{id}",id).then().statusCode(200).contentType(ContentType.JSON).body("name",equalTo("Alex"),"salary",equalTo(999));
     }
 
-    public void should_not_get_the_employee_that_has_been_deleted2(){
-        String id = given().formParameters("name","Alex","salary",999).
-                when().post("employee").body().asString();
-        given().param("id", id).
-                when().delete("employee");
-        given().log().all().get("employee/{id}", id).then().statusCode(204);
+
+    @Test(dependsOnMethods = "should_get_the_same_value_after_post")
+    public void should_be_able_to_delete(){
+        given().param("id",id).delete("employee").then().statusCode(200);
     }
 
+    @Test(dependsOnMethods = "should_be_able_to_delete")
+    public void should_not_be_able_to_get_after_delete(){
+        get("employee/{id}",id).then().statusCode(204);
+    }
 
 
 }

@@ -1,8 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="rest service" verbose="1" >
+<suite name="rest service" verbose="1">
 
     <parameter name="" value=""/>
+
+    <test name="init">
+        <packages>
+            <package name="common"/>
+        </packages>
+    </test>
 
     <test name="rest service" parallel="methods" >
         <classes>
