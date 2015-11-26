@@ -1,8 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="rest service" verbose="1">
+<suite name="rest service" verbose="1" >
 
-    <parameter name="" value=""/>
+    <parameter name="baseURI" value="http://127.0.0.1"/>
+    <parameter name="port" value="8080"/>
+    <parameter name="basePath" value="rest-test"/>
 
     <test name="init">
         <packages>
