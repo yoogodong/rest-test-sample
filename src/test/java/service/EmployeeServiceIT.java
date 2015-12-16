@@ -23,17 +23,22 @@ public class EmployeeServiceIT extends BaseIT{
 
     @Test
     public void should_return_digital_id_after_post_a_employee(){
-        id = given().formParameters("name",name,"salary",salary).when().post("employee").
-                then().statusCode(200).contentType(ContentType.JSON).
+        id = given().formParameters("name",name,"salary",salary).
+//        		log().all().
+        		when().post("employee").
+                then().
+//                log().all().
+                statusCode(200).contentType(ContentType.JSON).
                 extract().body().asString();
 
-        assertTrue(id.matches("\\d+"));
+        assertTrue(id.matches("\\d+"),"the returned id  must be digital");
     }
 
 
     @Test(dependsOnMethods = "should_return_digital_id_after_post_a_employee")
     public void should_get_the_same_value_after_post(){
-        get("employee/{id}",id).then().statusCode(200).contentType(ContentType.JSON).body("name",equalTo("Alex"),"salary",equalTo(999));
+        get("employee/{id}",id).
+                then().statusCode(200).contentType(ContentType.JSON).body("name",equalTo("Alex"),"salary",equalTo(999));
     }
 
 

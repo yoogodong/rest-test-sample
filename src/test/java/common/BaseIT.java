@@ -20,4 +20,6 @@ public class BaseIT {
         RestAssured.basePath=path;
         RestAssured.config = new RestAssuredConfig().encoderConfig(encoderConfig().defaultContentCharset("UTF-8"));
     }
+    
+    
 }
