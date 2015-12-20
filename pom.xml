@@ -76,10 +76,10 @@
             <version>6.9.6</version>
             <scope>test</scope>
             <exclusions>
-            	<exclusion>
-            		<groupId>junit</groupId>
-            		<artifactId>junit</artifactId>
-            	</exclusion>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -89,7 +89,6 @@
     <build>
         <plugins>
 
-	
 
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -118,6 +117,7 @@
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19</version>
                 <configuration>
                     <skip>${skipUT}</skip>
                     <suiteXmlFiles>
@@ -236,9 +236,43 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>2.17</version>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.6</version>
+                <configuration>
+                    <skipEmptyReport>true</skipEmptyReport>
+                    <rulesets>
+                        <ruleset>${basedir}/src/main/resources/rules/rulesets.xml</ruleset>
+                    </rulesets>
+                </configuration>
+            </plugin>
         </plugins>
+
     </build>
 
+    <reporting>
+        <plugins>
+            <!--<plugin>-->
+                <!--<artifactId>maven-pmd-plugin</artifactId>-->
+                <!--<version>3.6</version>-->
+                <!--<configuration>-->
+                    <!--<skipEmptyReport>true</skipEmptyReport>-->
+                    <!--<rulesets>-->
+                        <!--&lt;!&ndash;<ruleset>java-basic.xml</ruleset>&ndash;&gt;-->
+                    <!--</rulesets>-->
+                <!--</configuration>-->
+                <!--<reportSets>-->
+                    <!--<reportSet>-->
+                        <!--<reports>-->
+                            <!--<report>pmd</report>-->
+                            <!--<report>cpd</report>-->
+                        <!--</reports>-->
+                    <!--</reportSet>-->
+                <!--</reportSets>-->
+            <!--</plugin>-->
+        </plugins>
+    </reporting>
     <profiles>
         <profile>
             <id>it</id>
