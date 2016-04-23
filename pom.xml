@@ -11,19 +11,11 @@
 
 
     <properties>
-        <jersey.version>2.22</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <downloadSources>true</downloadSources>
         <downloadJavadocs>true</downloadJavadocs>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <!--<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>-->
-        <!--<sonar.jacoco.itReportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.itReportPath>-->
-        <!--<sonar.jacoco.reportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.reportPath>-->
-
-        <fork>false</fork>
+        <runOrStart>run</runOrStart>
         <skipUT>true</skipUT>
     </properties>
 
@@ -33,7 +25,7 @@
             <dependency>
                 <groupId>org.glassfish.jersey</groupId>
                 <artifactId>jersey-bom</artifactId>
-                <version>${jersey.version}</version>
+                <version>2.22</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -82,14 +74,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-
     </dependencies>
 
     <build>
         <plugins>
-
-
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -128,42 +116,10 @@
 
 
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <systemProperties>
-                        <!--不起作用-->
-                        <JAVA_OPTS>${jacoco.agent.itArgLine}</JAVA_OPTS>
-                    </systemProperties>
-                    <fork>${fork}</fork>
-                </configuration>
-                <executions>
-                    <!-- start server before integration tests -->
-                    <execution>
-                        <id>start-container</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <!-- stop server after integration tests -->
-                    <execution>
-                        <id>stop-container</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>shutdown</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>1.4.16</version>
                 <configuration>
-                    <skip>true</skip>
                     <container>
                         <containerId>tomcat7x</containerId>
                         <!--<zipUrlInstaller>
@@ -175,7 +131,6 @@
                         <properties>
                             <cargo.servlet.port>8080</cargo.servlet.port>
                             <cargo.tomcat.ajp.port>8109</cargo.tomcat.ajp.port>
-                            <!--<cargo.jvmargs>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.7.4.201502262128/org.jacoco.agent-0.7.4.201502262128-runtime.jar=destfile=${project.build.directory}/jacoco-it.exec</cargo.jvmargs>-->
                             <cargo.jvmargs>${jacoco.agent.itArgLine}</cargo.jvmargs>
                         </properties>
                     </configuration>
@@ -186,7 +141,7 @@
                         <id>start-container</id>
                         <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>start</goal>
+                            <goal>${runOrStart}</goal>
                         </goals>
                     </execution>
                     <!-- stop server after integration tests -->
@@ -230,54 +185,16 @@
                 </executions>
             </plugin>
 
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.6</version>
-                <configuration>
-                    <skipEmptyReport>true</skipEmptyReport>
-                    <rulesets>
-                        <ruleset>${basedir}/src/main/resources/rules/rulesets.xml</ruleset>
-                    </rulesets>
-                </configuration>
-            </plugin>
         </plugins>
 
     </build>
 
-    <reporting>
-        <plugins>
-            <!--<plugin>-->
-                <!--<artifactId>maven-pmd-plugin</artifactId>-->
-                <!--<version>3.6</version>-->
-                <!--<configuration>-->
-                    <!--<skipEmptyReport>true</skipEmptyReport>-->
-                    <!--<rulesets>-->
-                        <!--&lt;!&ndash;<ruleset>java-basic.xml</ruleset>&ndash;&gt;-->
-                    <!--</rulesets>-->
-                <!--</configuration>-->
-                <!--<reportSets>-->
-                    <!--<reportSet>-->
-                        <!--<reports>-->
-                            <!--<report>pmd</report>-->
-                            <!--<report>cpd</report>-->
-                        <!--</reports>-->
-                    <!--</reportSet>-->
-                <!--</reportSets>-->
-            <!--</plugin>-->
-        </plugins>
-    </reporting>
+
     <profiles>
         <profile>
             <id>it</id>
             <properties>
-                <fork>true</fork>
+                <runOrStart>start</runOrStart>
             </properties>
         </profile>
     </profiles>
