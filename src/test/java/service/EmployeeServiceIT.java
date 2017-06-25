@@ -23,7 +23,7 @@ public class EmployeeServiceIT extends BaseIT{
 
     @Test
     public void should_return_digital_id_after_post_a_employee(){
-        id = given().formParameters("name",name,"salary",salary).
+        id = given().formParam("name",name).formParam("salary",salary).
 //        		log().all().
         		when().post("employee").
                 then().

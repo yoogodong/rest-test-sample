@@ -11,6 +11,7 @@ import javax.ws.rs.ApplicationPath;
 @ApplicationPath("/")
 public class MyApplication extends ResourceConfig {
     public MyApplication(){
+        System.out.println("0000000");
         packages("service");
         property("com.sun.jersey.api.json.POJOMappingFeature", "true");
 //        register(LoggingFilter.class);
