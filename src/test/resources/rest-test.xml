@@ -11,16 +11,16 @@
         <!--</packages>-->
     <!--</test>-->
 
-    <!--<test name="rest service" parallel="methods" >-->
-        <!--<classes>-->
-            <!--<class name="service.DepartmentServiceIT"/>-->
-            <!--<class name="service.EmployeeServiceIT"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-
-    <test name="temp">
+    <test name="rest service" parallel="methods" >
         <classes>
-            <class name="temp.FailRetry"/>
+            <class name="service.DepartmentServiceIT"/>
+            <class name="service.EmployeeServiceIT"/>
         </classes>
     </test>
+
+    <!--<test name="temp">-->
+        <!--<classes>-->
+            <!--<class name="temp.FailRetry"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 </suite>

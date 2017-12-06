@@ -125,7 +125,7 @@
                         <!--<zipUrlInstaller>
                             <url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.22/bin/apache-tomcat-7.0.22.zip</url>
                         </zipUrlInstaller>-->
-                        <home>/Users/twer/Applications/apache-tomcat-7.0.62</home>
+                        <home>/usr/local/opt/tomcat@7/libexec</home>
                     </container>
                     <configuration>
                         <properties>
