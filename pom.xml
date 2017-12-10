@@ -16,7 +16,6 @@
         <downloadSources>true</downloadSources>
         <downloadJavadocs>true</downloadJavadocs>
         <runOrStart>run</runOrStart>
-        <skipUT>true</skipUT>
     </properties>
 
 
@@ -42,26 +41,16 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
         </dependency>
-
-        <!-- TODO: should use moxy instead of jackson ?-->
-        <!--<dependency>-->
-        <!--<groupId>org.glassfish.jersey.media</groupId>-->
-        <!--<artifactId>jersey-media-moxy</artifactId>-->
-        <!--</dependency>-->
-
-
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.jayway.restassured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>2.5.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -85,14 +74,12 @@
                 <executions>
                     <execution>
                         <id>ut</id>
-                        <phase>process-test-classes</phase>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>it</id>
-                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>prepare-agent-integration</goal>
                         </goals>
@@ -103,16 +90,7 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19</version>
-                <configuration>
-                    <skip>${skipUT}</skip>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>${basedir}/src/test/resources/ut.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
+
 
 
             <plugin>
@@ -155,16 +133,7 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+
 
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -186,6 +155,29 @@
             </plugin>
 
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>${basedir}/src/test/resources/ut.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
 
     </build>
 
