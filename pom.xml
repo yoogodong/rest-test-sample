@@ -64,7 +64,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.4.201502262128</version>
+                <version>0.7.9</version>
                 <executions>
                     <execution>
                         <id>ut</id>
@@ -90,7 +90,7 @@
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.4.16</version>
+                <version>1.6.5</version>
                 <configuration>
                     <container>
                         <containerId>tomcat7x</containerId>
