@@ -2,9 +2,7 @@ package service;
 
 import vo.Department;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -15,23 +13,28 @@ import javax.ws.rs.core.MediaType;
 public class DepartmentService {
 
 //    just for show test case
-    private Department department;
+    private Department cachedDepartment;
 
-    public DepartmentService() {
-        department = new Department();
-        department.setName("administrative");
-
-        EmployeeService es = new EmployeeService();
-
-        es.add("John",868);
-        es.add("Marry",999);
-        es.add("Nancy",1000);
-
-        department.getEmployeeList().addAll(es.get());
-    }
 
     @GET
-    public Department get(){
-        return department;
+    @Path("{someone}")
+    public Department get(@PathParam("someone") String someone){
+        return loadSampleDepartment();
+    }
+
+
+    private Department loadSampleDepartment(){
+        if (cachedDepartment == null) {
+            cachedDepartment = new Department();
+            cachedDepartment.setName("administrative");
+
+            EmployeeService es = new EmployeeService();
+
+            es.add("John", 868);
+            es.add("Marry", 999);
+            es.add("Nancy", 1000);
+            cachedDepartment.getEmployeeList().addAll(es.get());
+        }
+        return cachedDepartment;
     }
 }

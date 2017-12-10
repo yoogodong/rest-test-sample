@@ -1,6 +1,10 @@
 target/
-.classpath
+
 .idea/
+*.iml
+
+.classpath
 .project
 .settings/
-rest-test.iml
+
+s101plugin.state
