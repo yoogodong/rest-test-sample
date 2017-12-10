@@ -15,7 +15,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <downloadSources>true</downloadSources>
         <downloadJavadocs>true</downloadJavadocs>
-        <runOrStart>run</runOrStart>
+        <start>start</start>
     </properties>
 
 
@@ -113,7 +113,7 @@
                         <id>start-container</id>
                         <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>${runOrStart}</goal>
+                            <goal>${start}</goal>
                         </goals>
                     </execution>
                     <!-- stop server after integration tests -->
@@ -165,13 +165,5 @@
     </build>
 
 
-    <profiles>
-        <profile>
-            <id>it</id>
-            <properties>
-                <runOrStart>start</runOrStart>
-            </properties>
-        </profile>
-    </profiles>
 
 </project>
