@@ -10,13 +10,17 @@
 5, 关闭 tomcat
 
 #运行方式二:
-打开两个控制台窗口, 分别运行:
+运行:
 
-```mvn pre-integration-test  -Dstart=run ```
+```
+mvn pre-integration-test  -Dstart=run
 
 这个命令运行起 tomcat, 并部署应用, run 是指定 tomcat 插件的 goal
+```
+再打开一个命令窗口，运行：
 
-```mvn failsafe:integration-test```
- 
+```
+mvn failsafe:integration-test
 这个命令运行 接口测试
+```
 
