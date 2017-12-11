@@ -98,6 +98,7 @@
                             <url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.22/bin/apache-tomcat-7.0.22.zip</url>
                         </zipUrlInstaller>-->
                         <home>/usr/local/opt/tomcat@7/libexec</home>
+
                     </container>
                     <configuration>
                         <properties>
@@ -157,6 +158,12 @@
                     <configuration>
                         <source>1.7</source>
                         <target>1.7</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
                 </plugin>
             </plugins>
