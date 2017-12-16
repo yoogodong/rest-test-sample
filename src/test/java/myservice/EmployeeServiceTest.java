@@ -1,8 +1,8 @@
-package service;
+package myservice;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import vo.Employee;
+import app.utils.vo.Employee;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;

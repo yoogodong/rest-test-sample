@@ -1,7 +1,6 @@
-package service;
+package myservice;
 
 import com.jayway.restassured.http.ContentType;
-import common.BaseIT;
 import org.testng.annotations.Test;
 
 import static com.jayway.restassured.RestAssured.get;
@@ -14,7 +13,7 @@ import static org.testng.Assert.assertTrue;
  * Created by Yonggao.Dong on 15/10/08.
  * 这里继承 BaseIT 是为了在 eclipse 中运行单个测试方法时，可以先执行BaseIT的 BeforeSuite
  */
-public class EmployeeServiceIT extends BaseIT{
+public class EmployeeServiceIT{
 
     private String id;
     private String name="Alex";

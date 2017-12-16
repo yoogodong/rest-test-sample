@@ -1,6 +1,6 @@
-package service;
+package myservice;
 
-import vo.Department;
+import app.utils.vo.Department;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

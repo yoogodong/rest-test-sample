@@ -1,7 +1,7 @@
-package service;
+package myservice;
 
-import exception.DuplicateIdException;
-import vo.Employee;
+import app.utils.exception.DuplicateIdException;
+import app.utils.vo.Employee;
 
 import javax.inject.Singleton;
 import javax.ws.rs.*;

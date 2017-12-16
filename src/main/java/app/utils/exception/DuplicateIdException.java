@@ -1,4 +1,4 @@
-package exception;
+package app.utils.exception;
 
 /**
  * Created by Yonggao.Dong on 15/10/08.

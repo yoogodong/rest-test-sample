@@ -1,4 +1,4 @@
-package vo;
+package app.utils.vo;
 
 import java.util.ArrayList;
 import java.util.List;

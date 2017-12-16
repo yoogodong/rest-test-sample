@@ -1,4 +1,4 @@
-package monitor;
+package app.utils.monitor;
 
 import org.apache.log4j.Logger;
 import org.glassfish.jersey.server.monitoring.ApplicationEvent;
@@ -34,7 +34,7 @@ public class ExceptionListener implements ApplicationEventListener {
             switch (event.getType()){
                 case ON_EXCEPTION:
                     Throwable t = event.getException();
-                    logger.error("Found exception for requestType: "+event.getType(), t);
+                    logger.error("Found app.utils.exception for requestType: "+event.getType(), t);
             }
         }
     }

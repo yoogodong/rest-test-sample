@@ -1,6 +1,6 @@
 package app;
 
-import monitor.ExceptionListener;
+import app.utils.monitor.ExceptionListener;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
@@ -11,7 +11,6 @@ import javax.ws.rs.ApplicationPath;
 @ApplicationPath("/")
 public class MyApplication extends ResourceConfig {
     public MyApplication(){
-        System.out.println("0000000");
         packages("service");
         property("com.sun.jersey.api.json.POJOMappingFeature", "true");
 //        register(LoggingFilter.class);

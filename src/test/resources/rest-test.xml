@@ -1,26 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="rest service" verbose="1" allow-return-values="true" parallel="tests">
+<suite name="rest myservice" verbose="1" allow-return-values="true" parallel="tests">
     <parameter name="baseURI" value="http://127.0.0.1"/>
     <parameter name="port" value="8080"/>
     <parameter name="basePath" value="rest-test"/>
 
-    <!--<test name="init">-->
-        <!--<packages>-->
-            <!--<package name="common"/>-->
-        <!--</packages>-->
-    <!--</test>-->
-
-    <test name="rest service" parallel="methods" >
+    <test name="rest myservice" parallel="methods" >
         <classes>
-            <class name="service.DepartmentServiceIT"/>
-            <class name="service.EmployeeServiceIT"/>
+            <class name="myservice.BaseIT"/>
+            <class name="myservice.DepartmentServiceIT"/>
+            <class name="myservice.EmployeeServiceIT"/>
         </classes>
     </test>
-
-    <!--<test name="temp">-->
-        <!--<classes>-->
-            <!--<class name="temp.FailRetry"/>-->
-        <!--</classes>-->
-    <!--</test>-->
 </suite>

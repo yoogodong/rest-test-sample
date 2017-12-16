@@ -1,4 +1,4 @@
-package vo;
+package app.utils.vo;
 
 /**
  * Created by Yonggao.Dong on 15/10/08.

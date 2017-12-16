@@ -1,10 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="ut service" verbose="1" >
+<suite name="ut myservice" verbose="1" >
     <parameter name="" value=""/>
-    <test name="rest service"   >
+    <test name="rest myservice"   >
         <classes>
-            <class name="service.EmployeeServiceTest"/>
+            <class name="myservice.EmployeeServiceTest"/>
         </classes>
     </test>
 </suite>

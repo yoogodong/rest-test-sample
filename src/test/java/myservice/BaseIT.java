@@ -1,4 +1,4 @@
-package common;
+package myservice;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.config.RestAssuredConfig;
